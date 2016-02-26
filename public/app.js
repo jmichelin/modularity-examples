@@ -90,7 +90,7 @@ angular.module('App',[
 					to.authenticate = false;
 					$state.go(to.name);
 				}else{
-					$location.path('/signin');
+					$state.go('home');
 				}
 			})
 	  });
