@@ -1,12 +1,9 @@
 var Sequelize = require("sequelize");
+var dbconfig = require('../../config');
 
-var sequelize = null;
-if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL);
-} else {
-  // the application is executed on the local machine ... use mysql
-  sequelize = new Sequelize('plant', 'root', null)
-}
+var sequelize = new Sequelize(dbconfig.db.database, dbconfig.db.username, dbconfig.db.password, {
+  host: dbconfig.db.host
+});
 
 var User = sequelize.define("User", {
   username: Sequelize.STRING,
