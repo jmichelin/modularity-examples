@@ -1,12 +1,18 @@
+/**
+ * Created by jmichelin on 9/22/16.
+ */
+var mysql = require('mysql');
 var Sequelize = require("sequelize");
+var dbconfig = require('../config.js');
+//
+//DATABASE
+//
 
-var sequelize = null;
-if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL);
-} else {
-  // the application is executed on the local machine ... use mysql
-  sequelize = new Sequelize('plant', 'root', null)
-}
+var sequelize = new Sequelize(dbconfig.db.database, dbconfig.db.username, dbconfig.db.password, {
+  host: dbconfig.db.host
+});
+
+//console.log('sequelize', sequelize);
 
 var User = sequelize.define("User", {
   username: Sequelize.STRING,
@@ -40,7 +46,4 @@ Device.belongsTo(User);
 User.sync().then(function(){
   Device.sync();
 });
-
-exports.User = User;
-exports.Device = Device;
-exports.sequelize = sequelize;
+//

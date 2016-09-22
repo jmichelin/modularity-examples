@@ -4,6 +4,8 @@ var parser = require('body-parser');
 var nodemailer = require('nodemailer');
 var app = express();
 var routes = require('./routes.js');
+var db = require('./db.js')
+var helper = require('./helper.js');
 
 module.exports.app = app;
 app.use(parser.json());
